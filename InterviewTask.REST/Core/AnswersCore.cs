@@ -18,7 +18,7 @@ namespace InterviewTask.REST.Core
         }
         public async Task<List<Answers>> GetAnswersAsync()
         {
-            return await _context.Answers.ToListAsync();
+            return await _context.Answers.Include(i => i.Question).ToListAsync();
         }
     }
 }

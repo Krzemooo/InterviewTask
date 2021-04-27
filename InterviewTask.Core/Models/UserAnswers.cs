@@ -9,7 +9,6 @@ namespace InterviewTask.Core.Models
     {
         [Key]
         public int ID { get; set; }
-        public Question Question { get; set; }
         public Answers Answers { get; set; }
         public string UserLogin { get; set; }
         public DateTime AnswerDateTime { get; set; }

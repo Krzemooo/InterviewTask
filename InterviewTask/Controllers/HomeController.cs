@@ -1,4 +1,5 @@
 ﻿using InterviewTask.Core;
+using InterviewTask.Core.Models;
 using InterviewTask.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,9 +29,22 @@ namespace InterviewTask.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> SaveUserAnswer(string UserLogin, List<int> checkedAnswers)
+        public async Task<IActionResult> SaveUserAnswer(string userLogin, List<int> checkedAnswers)
         {
+            RESTCore.RESTCore rest = new RESTCore.RESTCore();
+            List<UserAnswers> userAnswers = new List<UserAnswers>();
 
+            foreach (int answerID in checkedAnswers)
+            {
+                userAnswers.Add(new UserAnswers()
+                {
+                    AnswerDateTime = DateTime.UtcNow,
+                    Answers = new Answers() { ID = answerID },
+                    UserLogin = userLogin
+                });
+            }
+
+            await rest.SaveUserAnsewer(userAnswers);
             return Ok();
         }
         public IActionResult Privacy()

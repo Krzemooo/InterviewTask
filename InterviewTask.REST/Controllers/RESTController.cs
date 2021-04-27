@@ -41,6 +41,8 @@ namespace InterviewTask.REST.Controllers
         [Route("InsertUserAnswer")]
         public async Task InsertUserAnswerAsync(List<UserAnswers> userAnswers)
         {
+            Core.UserAnswersCore userAnswersCore = new Core.UserAnswersCore(_context);
+            await userAnswersCore.InsertUserAnswersAsync(userAnswers);
 
         }
     }
