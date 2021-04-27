@@ -20,7 +20,13 @@ namespace InterviewTask.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            HomepageModel model = new HomepageModel() { Question = new Dictionary<int, string>() };
+            #region TempData
+            model.Question.Add(1, "Q1");
+            model.Question.Add(2, "Q2");
+            model.Question.Add(3, "Q3");
+            #endregion
+            return View(model);
         }
 
         public IActionResult Privacy()
