@@ -1,4 +1,5 @@
-﻿@model HomepageModel
+﻿@using InterviewTask.Core.Models
+@model HomepageModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -15,12 +16,13 @@
     <input type="text" id="LoginInput" />
 </div>
 <div class="row">
-    @if (Model != null && Model.Question != null && Model.Question.Count > 0)
+    @if (Model != null && Model.Questions != null && Model.Questions.Count > 0)
     {
-        foreach (KeyValuePair<int, string> singleQuestion in Model.Question)
+        foreach (Question singleQuestion in Model.Questions)
         {
-            <div class="col-4 border QuestionField" data-id="@singleQuestion.Key">
-                <p>@singleQuestion.Value</p>
+            <div class="col-4 border QuestionField" data-id="@singleQuestion.ID">
+                <p>@singleQuestion.QuestionContent</p>
+
             </div>
         }
     }

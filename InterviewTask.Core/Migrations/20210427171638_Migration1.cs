@@ -46,9 +46,9 @@ namespace InterviewTask.Core.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionID = table.Column<int>(nullable: false),
-                    AnswersID = table.Column<int>(nullable: false),
-                    UserLogin = table.Column<string>(nullable: false),
+                    QuestionID = table.Column<int>(nullable: true),
+                    AnswersID = table.Column<int>(nullable: true),
+                    UserLogin = table.Column<string>(nullable: true),
                     AnswerDateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -59,13 +59,13 @@ namespace InterviewTask.Core.Migrations
                         column: x => x.AnswersID,
                         principalTable: "Answers",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserAnswers_Questions_QuestionID",
                         column: x => x.QuestionID,
                         principalTable: "Questions",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

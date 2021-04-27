@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InterviewTask.Core.Migrations
 {
     [DbContext(typeof(WebDBContext))]
-    [Migration("20210427164220_Migration1")]
+    [Migration("20210427171638_Migration1")]
     partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,14 +66,13 @@ namespace InterviewTask.Core.Migrations
                     b.Property<DateTime>("AnswerDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("AnswersID")
+                    b.Property<int?>("AnswersID")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionID")
+                    b.Property<int?>("QuestionID")
                         .HasColumnType("int");
 
                     b.Property<string>("UserLogin")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -96,15 +95,11 @@ namespace InterviewTask.Core.Migrations
                 {
                     b.HasOne("InterviewTask.Core.Models.Answers", "Answers")
                         .WithMany()
-                        .HasForeignKey("AnswersID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AnswersID");
 
                     b.HasOne("InterviewTask.Core.Models.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("QuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("QuestionID");
                 });
 #pragma warning restore 612, 618
         }

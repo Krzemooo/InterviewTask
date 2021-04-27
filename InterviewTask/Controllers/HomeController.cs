@@ -1,4 +1,5 @@
-﻿using InterviewTask.Models;
+﻿using InterviewTask.Core;
+using InterviewTask.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,17 +19,20 @@ namespace InterviewTask.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            HomepageModel model = new HomepageModel() { Question = new Dictionary<int, string>() };
-            #region TempData
-            model.Question.Add(1, "Q1");
-            model.Question.Add(2, "Q2");
-            model.Question.Add(3, "Q3");
-            #endregion
+            HomepageModel model = new HomepageModel();
+            RESTCore.RESTCore rest = new RESTCore.RESTCore();
+            model.Questions = await rest.GetQuestions();
+            model.Answers = await rest.GetAnswers();
             return View(model);
         }
 
+        public async Task<IActionResult> SaveUserAnswer(string UserLogin, List<int> checkedAnswers)
+        {
+
+            return Ok();
+        }
         public IActionResult Privacy()
         {
             return View();
